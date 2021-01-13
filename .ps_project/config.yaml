@@ -9,7 +9,6 @@ workflows:
         params:
           command: python mnist.py
           container: tensorflow/tensorflow:1.13.1-gpu-py3
-          machineType: P4000
           experimentEnv:
             EPOCHS_EVAL: 5
             EVAL_SECS: 10
