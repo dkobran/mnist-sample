@@ -9,13 +9,13 @@ workflows:
         params:
           command: python mnist.py
           container: tensorflow/tensorflow:1.13.1-gpu-py3
+          clusterId: clq6q1qt0
+          machineType: "P4000"
+          modelPath: "/artifacts"
+          modelType: "Tensorflow"
           experimentEnv:
             EPOCHS_EVAL: 5
             EVAL_SECS: 10
             MAX_STEPS: 18
             TRAIN_EPOCHS: 3
-          clusterId: clq6q1qt0
-          machineType: P4000
-          modelPath: /artifacts
-          modelType: Tensorflow
           
