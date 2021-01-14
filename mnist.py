@@ -89,12 +89,13 @@ def create_model(data_format):
 
 
 def define_mnist_flags():
-    flags.DEFINE_integer('eval_secs', os.environ.get('EVAL_SECS', 600), 'How frequently to run evaluation step')
-    flags.DEFINE_integer('ckpt_steps', os.environ.get('CKPT_STEPS', 600), 'How frequently to save a model checkpoint')
-    flags.DEFINE_integer('max_ckpts', 5, 'Maximum number of checkpoints to keep')
-    flags.DEFINE_integer('max_steps', os.environ.get('MAX_STEPS', 150000), 'Max steps')
+
     flags.DEFINE_integer('save_summary_steps', 100, 'How frequently to save TensorBoard summaries')
     flags.DEFINE_integer('log_step_count_steps', 100, 'How frequently to log loss & global steps/s')
+
+    # Set up checkpoints.
+    flags.DEFINE_integer('ckpt_steps', os.environ.get('CKPT_STEPS', 600), 'How frequently to save a model checkpoint')
+    flags.DEFINE_integer('max_ckpts', 5, 'Maximum number of checkpoints to keep')
     flags_core.define_base()
     flags_core.define_performance(num_parallel_calls=False)
     flags_core.define_image()
@@ -102,11 +103,19 @@ def define_mnist_flags():
     model_dir = os.path.abspath(os.environ.get('PS_MODEL_PATH', os.getcwd() + '/models') + '/mnist')
     export_dir = os.path.abspath(os.environ.get('PS_MODEL_PATH', os.getcwd() + '/models'))
     flags.adopt_module_key_flags(flags_core)
+
+    # Set up stopping.
+    flags.DEFINE_integer('eval_secs', os.environ.get('EVAL_SECS', 60), 'How frequently to run evaluation step')
+    flags.DEFINE_integer('max_steps', os.environ.get('MAX_STEPS', 50), 'Max steps')
+
+    # Set up export.
     flags_core.set_defaults(data_dir=data_dir,
                             model_dir=model_dir,
                             export_dir=export_dir,
-                            train_epochs=int(os.environ.get('TRAIN_EPOCHS', 40)),
-                            epochs_between_evals=int(os.environ.get('EPOCHS_EVAL', 100)),
+
+                            # Set up hyperparameters.
+                            train_epochs=int(os.environ.get('TRAIN_EPOCHS', 8)),
+                            epochs_between_evals=int(os.environ.get('EPOCHS_EVAL', 10)),
                             batch_size=int(os.environ.get('BATCH_SIZE', 100)),
                             )
 
