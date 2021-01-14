@@ -13,9 +13,4 @@ workflows:
           machineType: "P4000"
           modelPath: "/artifacts"
           modelType: "Tensorflow"
-          experimentEnv:
-            EPOCHS_EVAL: 4
-            EVAL_SECS: 10
-            MAX_STEPS: 18
-            TRAIN_EPOCHS: 3
           
