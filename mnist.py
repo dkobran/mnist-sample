@@ -116,7 +116,7 @@ def define_mnist_flags():
                             # Set up hyperparameters.
                             train_epochs=int(os.environ.get('TRAIN_EPOCHS', 8)),
                             epochs_between_evals=int(os.environ.get('EPOCHS_EVAL', 10)),
-                            batch_size=int(os.environ.get('BATCH_SIZE', 80)),
+                            batch_size=int(os.environ.get('BATCH_SIZE', 100)),
                             )
 
 
