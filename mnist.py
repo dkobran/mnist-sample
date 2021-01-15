@@ -104,9 +104,9 @@ def define_mnist_flags():
     export_dir = os.path.abspath(os.environ.get('PS_MODEL_PATH', os.getcwd() + '/models'))
     flags.adopt_module_key_flags(flags_core)
 
-    # Set up stopping.
-    flags.DEFINE_integer('eval_secs', os.environ.get('EVAL_SECS', 60), 'How frequently to run evaluation step')
-    flags.DEFINE_integer('max_steps', os.environ.get('MAX_STEPS', 60), 'Max steps')
+    # Set up eval & stopping.
+    flags.DEFINE_integer('eval_secs', os.environ.get('EVAL_SECS', 100), 'How frequently to run evaluation step')
+    flags.DEFINE_integer('max_steps', os.environ.get('MAX_STEPS', 200), 'Max steps')
 
     # Set up export.
     flags_core.set_defaults(data_dir=data_dir,
@@ -114,9 +114,9 @@ def define_mnist_flags():
                             export_dir=export_dir,
 
                             # Set up hyperparameters.
-                            train_epochs=int(os.environ.get('TRAIN_EPOCHS', 12)),
-                            epochs_between_evals=int(os.environ.get('EPOCHS_EVAL', 10)),
-                            batch_size=int(os.environ.get('BATCH_SIZE', 100)),
+                            train_epochs=int(os.environ.get('TRAIN_EPOCHS', 20)),
+                            epochs_between_evals=int(os.environ.get('EPOCHS_EVAL', 40)),
+                            batch_size=int(os.environ.get('BATCH_SIZE', 101)),
                             )
 
 
